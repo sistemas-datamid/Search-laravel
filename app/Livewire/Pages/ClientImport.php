@@ -18,7 +18,7 @@ class ClientImport extends Component
 
 
     protected $rules = [
-        'file' => 'required|mimes:csv,txt|max:2048',
+        'file' => 'required|mimes:csv,txt,xlsx|max:2048',
     ];
 
     public function importCVS()

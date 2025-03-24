@@ -20,26 +20,41 @@ class ClientsImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
 
-
-
         DB::transaction(function () use ($row) {
-            $fechaAlta = '2022-03-01';
-         
+
+
+            $fechaAlta = Carbon::parse($row['fecha_alta_base_datos'])->translatedFormat('Y-m-d');
+
+            // dd([
+            //     'RFC' => $row['rfc'],
+            //     'CURP' => $row['curp'],
+            //     'REC' => $row['rec'],
+            //     'Excel_id' => $row['id'],
+            //     'Activo' => $row['activo'],
+            //     'Primer_Apellido' => $row['primer_apellido'],
+            //     'Segundo_Apellido' => $row['segundo_apellido'],
+            //     'Razon_Social' => $row['nombre_o_razon_social'],
+            //     'Fecha_Alta' => $fechaAlta,
+            //     'Hora_Alta' => $row['hora_alta'],
+            //     'Clave_Actividad' => $row['clave_actividad'],
+            //     'Actividad_Fiscal' => $row['actividad_fiscal'],
+            // ]);
+
             Contribuyente::create([
-                'RFC' => $row['rfc'],  
-                'CURP' => $row['curp'],  
-                'REC' => $row['rec'], 
-                'Excel_id' => $row['id'], 
-                'Activo' => $row['activo'],  
-                'Primer_Apellido' => $row['primer_apellido'], 
-                'Segundo_Apellido' => $row['segundo_apellido'], 
-                'Razon_Social' => $row['nombre_o_razon_social'],  
-                'Fecha_Alta' => $fechaAlta, 
-                'Hora_Alta' => $row['hora_alta'], 
-                'Clave_Actividad' => $row['clave_actividad'], 
-                'Actividad_Fiscal' => $row['actividad_fiscal'],  
+                'RFC' => $row['rfc'],
+                'CURP' => $row['curp'],
+                'REC' => $row['rec'],
+                'Excel_id' => $row['id'],
+                'Activo' => $row['activo'],
+                'Primer_Apellido' => $row['primer_apellido'],
+                'Segundo_Apellido' => $row['segundo_apellido'],
+                'Razon_Social' => $row['nombre_o_razon_social'],
+                'Fecha_Alta' => $fechaAlta,
+                'Hora_Alta' => $row['hora_alta'],
+                'Clave_Actividad' => $row['clave_actividad'],
+                'Actividad_Fiscal' => $row['actividad_fiscal'],
             ]);
-            
+
             // Client::create([
             //     'name' => $row['name'],
             //     'email' => $row['email'],
