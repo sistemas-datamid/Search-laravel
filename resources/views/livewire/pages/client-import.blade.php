@@ -71,13 +71,13 @@
                             <tbody>
                                 @foreach($contribuyentes as $contribuyente)
                                 <tr class="odd:bg-white even:bg-gray-100 dark:odd:bg-gray-800 dark:even:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-500">
-                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->rfc}}</td>
-                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->curp}}</td>
-                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->primer_apellido}}</td>
-                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->excel_id}}</td>
-                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->curp}}</td>
-                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->curp}}</td>
-                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->curp}}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->Excel_id}}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->RFC}}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->Primer_Apellido}}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->Segundo_Apellido}}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->Razon_Social}}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->CURP}}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->Activo}}</td>
                                     <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"></td>
                                 </tr>
                                 @endforeach

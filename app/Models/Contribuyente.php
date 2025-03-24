@@ -10,9 +10,17 @@ class Contribuyente extends Model
     use HasFactory;
 
     protected $fillable = [
-        'rfc',
-        'curp',
-        'primer_apellido',
-        'excel_id'
-    ]; 
+        'RFC',
+        'CURP',
+        'REC',
+        'Excel_id',
+        'Activo',
+        'Primer_Apellido',
+        'Segundo_Apellido',
+        'Razon_Social',
+        'Fecha_Alta',
+        'Hora_Alta',
+        'Clave_Actividad',
+        'Actividad_Fiscal'
+    ];
 }
