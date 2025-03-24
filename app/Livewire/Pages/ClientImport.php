@@ -4,15 +4,18 @@ namespace App\Livewire\Pages;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
+
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ClientsImport;
-use App\Models\Client;
+use App\Models\Contribuyente;
 
 class ClientImport extends Component
 {
+    use WithPagination;
     use WithFileUploads;
     public $file;
-   
+
 
     protected $rules = [
         'file' => 'required|mimes:csv,txt|max:2048',
@@ -29,8 +32,8 @@ class ClientImport extends Component
 
     public function render()
     {
-        $clients = Client::all();
+        $contribuyentes = Contribuyente::orderBy('id', 'desc')->paginate(8);
 
-        return view('livewire.pages.client-import', compact('clients'));
+       return view('livewire.pages.client-import', compact('contribuyentes'));
     }
 }

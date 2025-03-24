@@ -1,144 +1,91 @@
 <div>
+
     <section class="container px-4 mx-auto">
 
-        <!-- Mensajes de éxito o error -->
+        <!-- ALERTAS -->
+        <div class="sm:flex sm:items-end sm:justify-end mt-4">
+            @if (session('success'))
+            <div class="p-4 mb-4 text-sm text-white rounded-xl bg-emerald-500 font-normal" role="alert">
+                <span class="font-semibold mr-2">Success</span> {{ session('success') }}
+            </div>
+            @endif
 
+            @if (session('error'))
+            <div class="p-4 mb-4 text-sm text-white rounded-xl bg-red-500 font-normal" role="alert">
+                <span class="font-semibold mr-2">Error</span> {{ session('error') }}
+            </div>
+            @endif
+        </div>
 
-        <div class="mt-6 md:flex md:items-center md:justify-between">
-            <div class="relative flex items-center mt-4 md:mt-0">
-                <span class="absolute">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-3 text-gray-400 dark:text-gray-600">
+        <div class="sm:flex sm:items-center sm:justify-between gap-4 mb-4">
+            <!-- Campo de búsqueda -->
+            <div class="relative flex items-center flex-1">
+                <span class="absolute left-3 top-1/2 transform -translate-y-1/2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400 dark:text-gray-600">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                 </span>
-
-                <input type="text" placeholder="Search" class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                <input type="text" placeholder="Search" class="block w-full py-3 pr-5 pl-11 text-gray-700 bg-white border border-gray-200 rounded-lg placeholder-gray-400/70 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
             </div>
-            <div class="flex">
-                <form wire:submit.prevent="importCVS">
-                    <div class="mb-4">
-                        <label for="file" class="block text-sm font-medium text-gray-700">Seleccionar archivo CSV</label>
-                        <input type="file" wire:model="file" id="file" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" accept=".csv,.txt">
+
+            <!-- Formulario de importación -->
+            <form wire:submit.prevent="importCVS" class="w-full sm:w-auto">
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <!-- Input de archivo -->
+                    <div class="w-full sm:w-auto">
+                        <input type="file" wire:model="file" id="file" class="block w-full px-3 py-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full dark:file:bg-gray-800 dark:file:text-gray-200 dark:text-gray-300 placeholder-gray-400/70 dark:placeholder-gray-500 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:focus:border-blue-300" accept=".csv,.txt">
                     </div>
 
-                    <!-- Mostrar errores de validación -->
-                    @error('file')
-                    <div class="text-red-500 text-xs mt-2">{{ $message }}</div>
-                    @enderror
-
-                    <!-- Botón de enviar -->
-                    <div class="mt-4">
-                        <button type="submit" class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-                            Importar Clientes
+                    <!-- Botón de importación -->
+                    <div class="sm:mt-0 w-full sm:w-auto">
+                        <button type="submit" class="flex items-center justify-center px-4 py-2 text-sm font-medium border border-gray-400 rounded-lg text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300 gap-x-3 hover:bg-gray-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                            </svg>
+                            <span>Importar</span>
                         </button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
 
-        <div class="flex flex-col mt-6">
-            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                    <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
 
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Telefono</th>
-                            <th>Direccion</th>
-                        </thead>
-                        <tbody>
-                            @foreach($clients as $client)
-                            <tr>
-                                <td>{{ $client->name }}</td>
-                                <td>{{ $client->email }}</td>
-                                <td>{{ $client->phone }}</td>
-                                <td>{{ $client->address }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                        <!-- <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                            <thead class="bg-gray-50 dark:bg-gray-800">
-                                <tr>
-                                    <th scope="col" class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        <button class="flex items-center gap-x-3 focus:outline-none">
-                                            <span>Company</span>
 
-                                            <svg class="h-3" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2.13347 0.0999756H2.98516L5.01902 4.79058H3.86226L3.45549 3.79907H1.63772L1.24366 4.79058H0.0996094L2.13347 0.0999756ZM2.54025 1.46012L1.96822 2.92196H3.11227L2.54025 1.46012Z" fill="currentColor" stroke="currentColor" stroke-width="0.1" />
-                                                <path d="M0.722656 9.60832L3.09974 6.78633H0.811638V5.87109H4.35819V6.78633L2.01925 9.60832H4.43446V10.5617H0.722656V9.60832Z" fill="currentColor" stroke="currentColor" stroke-width="0.1" />
-                                                <path d="M8.45558 7.25664V7.40664H8.60558H9.66065C9.72481 7.40664 9.74667 7.42274 9.75141 7.42691C9.75148 7.42808 9.75146 7.42993 9.75116 7.43262C9.75001 7.44265 9.74458 7.46304 9.72525 7.49314C9.72522 7.4932 9.72518 7.49326 9.72514 7.49332L7.86959 10.3529L7.86924 10.3534C7.83227 10.4109 7.79863 10.418 7.78568 10.418C7.77272 10.418 7.73908 10.4109 7.70211 10.3534L7.70177 10.3529L5.84621 7.49332C5.84617 7.49325 5.84612 7.49318 5.84608 7.49311C5.82677 7.46302 5.82135 7.44264 5.8202 7.43262C5.81989 7.42993 5.81987 7.42808 5.81994 7.42691C5.82469 7.42274 5.84655 7.40664 5.91071 7.40664H6.96578H7.11578V7.25664V0.633865C7.11578 0.42434 7.29014 0.249976 7.49967 0.249976H8.07169C8.28121 0.249976 8.45558 0.42434 8.45558 0.633865V7.25664Z" fill="currentColor" stroke="currentColor" stroke-width="0.3" />
-                                            </svg>
-                                        </button>
-                                    </th>
-
-                                    <th scope="col" class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Status
-                                    </th>
-
-                                    <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        About
-                                    </th>
-
-                                    <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Users</th>
-
-                                    <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">License use</th>
-
-                                    <th scope="col" class="relative py-3.5 px-4">
-                                        <span class="sr-only">Edit</span>
-                                    </th>
+        <div class="flex flex-col">
+            <div class="overflow-x-auto">
+                <div class="min-w-full inline-block align-middle">
+                    <div class="overflow-hidden border rounded-lg border-gray-300 dark:border-gray-500 shadow-md dark:shadow-lg">
+                        <table class="min-w-full rounded-xl bg-white dark:bg-gray-800">
+                            <thead>
+                                <tr class="bg-gray-100 dark:bg-gray-700">
+                                    <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"> ID </th>
+                                    <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"> RFC </th>
+                                    <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"> Primer apellido </th>
+                                    <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"> Segundo apellido </th>
+                                    <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"> Razon social </th>
+                                    <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"> CURP</th>
+                                    <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"> Activo </th>
+                                    <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"></th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                                <tr>
-                                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                        <div>
-                                            <h2 class="font-medium text-gray-800 dark:text-white ">Catalog</h2>
-                                            <p class="text-sm font-normal text-gray-600 dark:text-gray-400">catalogapp.io</p>
-                                        </div>
-                                    </td>
-                                    <td class="px-12 py-4 text-sm font-medium whitespace-nowrap">
-                                        <div class="inline px-3 py-1 text-sm font-normal rounded-full text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
-                                            Customer
-                                        </div>
-                                    </td>
-                                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                        <div>
-                                            <h4 class="text-gray-700 dark:text-gray-200">Content curating app</h4>
-                                            <p class="text-gray-500 dark:text-gray-400">Brings all your news into one place</p>
-                                        </div>
-                                    </td>
-                                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <img class="object-cover w-6 h-6 -mx-1 border-2 border-white rounded-full dark:border-gray-700 shrink-0" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=256&q=80" alt="">
-                                            <img class="object-cover w-6 h-6 -mx-1 border-2 border-white rounded-full dark:border-gray-700 shrink-0" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=256&q=80" alt="">
-                                            <img class="object-cover w-6 h-6 -mx-1 border-2 border-white rounded-full dark:border-gray-700 shrink-0" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1256&q=80" alt="">
-                                            <img class="object-cover w-6 h-6 -mx-1 border-2 border-white rounded-full dark:border-gray-700 shrink-0" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=256&q=80" alt="">
-                                            <p class="flex items-center justify-center w-6 h-6 -mx-1 text-xs text-blue-600 bg-blue-100 border-2 border-white rounded-full">+4</p>
-                                        </div>
-                                    </td>
-
-                                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                        <div class="w-48 h-1.5 bg-blue-200 overflow-hidden rounded-full">
-                                            <div class="bg-blue-500 w-2/3 h-1.5"></div>
-                                        </div>
-                                    </td>
-
-                                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                        <button class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-                                            </svg>
-                                        </button>
-                                    </td>
+                            <tbody>
+                                @foreach($contribuyentes as $contribuyente)
+                                <tr class="odd:bg-white even:bg-gray-100 dark:odd:bg-gray-800 dark:even:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-500">
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->rfc}}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->curp}}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->primer_apellido}}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->excel_id}}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->curp}}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->curp}}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->curp}}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"></td>
                                 </tr>
-
+                                @endforeach
                             </tbody>
-                        </table> -->
+                        </table>
                     </div>
+
+                    {{ $contribuyentes->links() }}
                 </div>
             </div>
         </div>
