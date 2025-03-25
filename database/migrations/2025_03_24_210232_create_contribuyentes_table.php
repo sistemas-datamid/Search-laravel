@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('contribuyentes', function (Blueprint $table) {
             $table->id();
             $table->string('RFC');
-            $table->string('CURP');
+            $table->string('CURP')->nullable();
             // $table->string('RFC')->unique();
             // $table->string('CURP')->unique();
             $table->integer('REC');

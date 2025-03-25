@@ -17,6 +17,7 @@
             @endif
         </div>
 
+
         <div class="sm:flex sm:items-center sm:justify-between gap-4 mb-4">
             <!-- Campo de búsqueda -->
             <div class="relative flex items-center flex-1">
@@ -58,6 +59,7 @@
                         <table class="min-w-full rounded-xl bg-white dark:bg-gray-800">
                             <thead>
                                 <tr class="bg-gray-100 dark:bg-gray-700">
+                                    <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"></th>
                                     <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"> ID </th>
                                     <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"> RFC </th>
                                     <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"> Primer apellido </th>
@@ -65,20 +67,25 @@
                                     <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"> Razon social </th>
                                     <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"> CURP</th>
                                     <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"> Activo </th>
-                                    <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 dark:text-gray-100 capitalize"></th>
+
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($contribuyentes as $contribuyente)
-                                <tr class="odd:bg-white even:bg-gray-100 dark:odd:bg-gray-800 dark:even:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-500">
+                                <tr class="odd:bg-white even:bg-gray-100 dark:odd:bg-gray-800 dark:even:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-500 ">
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100">
+                                        <a href="{{route('client-details',['id' => $contribuyente->id])}}">
+                                            <x-heroicon-o-document-text class="h-6 w-6 text-gray-700 dark:text-gray-300" />
+                                        </a>
+                                    </td>
+
                                     <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->Excel_id}}</td>
                                     <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->RFC}}</td>
                                     <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->Primer_Apellido}}</td>
                                     <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->Segundo_Apellido}}</td>
                                     <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->Razon_Social}}</td>
                                     <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->CURP}}</td>
-                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->Activo}}</td>
-                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"></td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 dark:text-gray-100"> {{ $contribuyente->Activo == 1 ? 'Sí' : 'No' }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

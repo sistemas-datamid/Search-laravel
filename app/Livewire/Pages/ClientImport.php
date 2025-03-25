@@ -28,12 +28,14 @@ class ClientImport extends Component
         Excel::import(new ClientsImport, $this->file);
     }
 
-    public function mouth() {}
+
 
     public function render()
     {
         $contribuyentes = Contribuyente::orderBy('id', 'desc')->paginate(8);
 
-       return view('livewire.pages.client-import', compact('contribuyentes'));
+       return view('livewire.pages.client-import', compact('contribuyentes'))->layout('layouts.default');
     }
+
+    
 }

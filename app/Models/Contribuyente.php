@@ -23,4 +23,9 @@ class Contribuyente extends Model
         'Clave_Actividad',
         'Actividad_Fiscal'
     ];
+
+    public function direcciones()
+    {
+        return $this->hasMany(Direccion::class);
+    }
 }

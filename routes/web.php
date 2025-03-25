@@ -2,14 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+use App\Livewire\pages\ClientDetail;
+use App\Livewire\pages\ClientImport;
 
-Route::get('/', function () {
-    return view('data-search');
-});
 
+Route::get('', ClientImport::class)->name('client');
+Route::get('/client/{id}', ClientDetail::class)->name('client-details');
 
 Route::middleware([
     'auth:sanctum',
