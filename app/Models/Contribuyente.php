@@ -21,7 +21,8 @@ class Contribuyente extends Model
         'Fecha_Alta',
         'Hora_Alta',
         'Clave_Actividad',
-        'Actividad_Fiscal'
+        'Actividad_Fiscal',
+        'Inicio_Operaciones'
     ];
 
     public function direcciones()

@@ -90,12 +90,13 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
 
-                    {{ $contribuyentes->links() }}
+                  
+
+                        {{ $contribuyentes->links() }}
+                    </div>
                 </div>
             </div>
-        </div>
 
     </section>
 </div>

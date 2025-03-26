@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('RFC');
             $table->string('CURP')->nullable();
-            // $table->string('RFC')->unique();
-            // $table->string('CURP')->unique();
             $table->integer('REC');
             $table->integer('Excel_id');
             $table->boolean('Activo')->default(true);
@@ -27,6 +25,7 @@ return new class extends Migration
             $table->time('Hora_Alta');
             $table->string('Clave_Actividad');
             $table->string('Actividad_Fiscal');
+            $table->date('Inicio_Operaciones');
             $table->timestamps();
         });
     }
